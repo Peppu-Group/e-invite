@@ -1,0 +1,27 @@
+{
+  "name": "peppu-einvite",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@ebarooni/capacitor-calendar": "^7.2.0",
+    "@supabase/supabase-js": "^2.50.2",
+    "html2pdf": "^0.0.11",
+    "html2pdf.js": "^0.10.3",
+    "jsbarcode": "^3.12.1",
+    "qrious": "^4.0.2",
+    "supabase": "^2.30.4",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.3",
+    "vite": "^6.2.4",
+    "vite-plugin-vue-devtools": "^7.7.2",
+    "vue-router": "^4.2.2"
+  }
+}
