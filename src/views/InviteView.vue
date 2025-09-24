@@ -126,12 +126,12 @@ export default {
                         cordially invite:`,
                 ndaText: 'Please note: Photography and video recording are not permitted during the ceremony. We kindly ask all guests to honor this request.',
                 invitedGuest: this.person.name,
-                eventType: "to the Traditional Wedding of",
+                eventType: "to the Wedding of",
                 bride: "Chidimma",
                 groom: "Dama",
                 date: "26th September, 2025",
                 time: "at two o'clock in the afternoon",
-                venueName: "Brownhills Event Center",
+                venueName: "VENUE: Brownhills Event Center",
                 address: "Ogunu Warri, Delta state",
                 rsvpTitle: "RSVP: 3030.ng Event Planner",
                 rsvpContact: "+2349077098636"
@@ -207,11 +207,11 @@ export default {
         addToCalendar() {
             const data = this.invitationData;
             const eventDetails = {
-                title: `Ugo & ${data.groom} White Wedding`,
+                title: `Chidima & ${data.groom} Wedding`,
                 start: '20250926T140000Z', // UTC format
                 end: '20250926T180000Z',
                 location: `${data.venueName}, ${data.address}`,
-                description: `Traditional Wedding Ceremony for ${data.bride} & ${data.groom}. ${data.rsvpTitle} (${data.rsvpContact})`,
+                description: `Wedding Ceremony for ${data.bride} & ${data.groom}. ${data.rsvpTitle} (${data.rsvpContact})`,
                 uid: `${Date.now()}@peppubuild.com`
             };
 
