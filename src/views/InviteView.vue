@@ -51,9 +51,6 @@
                         <button class="btn btn-secondary" @click="addToCalendar">
                             📅 Add to Calendar
                         </button>
-                        <button class="btn btn-secondary" @click="goRsvp">
-                            🗓️ RSVP
-                        </button>
                     </div>
 
                     <div class="nda-text">
@@ -134,10 +131,10 @@ export default {
                 groom: "Dama",
                 date: "26th September, 2025",
                 time: "at two o'clock in the afternoon",
-                venueName: "Hollywood Event Center",
-                address: "Enugu-Onitsha Expressway, Agu-Awka",
-                rsvpTitle: "RSVP: Event Lord Events",
-                rsvpContact: "08160485223"
+                venueName: "Brownhills Event Center",
+                address: "Ogunu Warri, Delta state",
+                rsvpTitle: "RSVP: 3030.ng Event Planner",
+                rsvpContact: "+2349077098636"
             }
         }
     },
@@ -174,7 +171,7 @@ export default {
             const qrCanvas = element.querySelector('#qr-code');
             const qr = new QRious({
                 element: qrCanvas,
-                value: `https://belovedunion.eventlord.org/verify/${this.person.id}`,
+                value: `https://e-invite.peppubuild.com/verify/${this.person.id}`,
                 size: 120
             });
 
