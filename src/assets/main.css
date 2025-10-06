@@ -13,6 +13,8 @@
     --soft-charcoal: #4a4a4a;
     --light-gray: #8b8b8b;
     --pale-blush: #f9f6f3;
+    --primary-color: #E91E63;
+    --secondary-color: #F8F3ED;
     --subtle-shadow: rgba(0, 0, 0, 0.08);
 }
 
@@ -36,7 +38,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Custom Bootstrap Navbar - Fixed overflow issues */
+/* Custom Bootstrap Navbar - Fixed overflow issues 
 .navbar {
     background: rgba(44, 44, 44, 0.95) !important;
     backdrop-filter: blur(10px);
@@ -106,6 +108,7 @@ body {
     width: 1.5em;
     height: 1.5em;
 }
+*/
 
 /* Ensure navbar collapse doesn't cause overflow */
 .navbar-collapse {
