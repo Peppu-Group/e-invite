@@ -3,7 +3,7 @@
         <div v-if="isLoading" class="loading-overlay">
             <div class="loading-content">
                 <div class="loading-ring"></div>
-                <h3>Loading Birthday RSVP...</h3>
+                <h3>Loading Wedding RSVP...</h3>
                 <p>Preparing something beautiful ✨</p>
             </div>
         </div>
@@ -12,18 +12,21 @@
 
             <div class="decorative-line"></div>
 
-            <p class="invitation-text">You are invited to Edeh's birthday</p>
+            <p class="invitation-text">You are invited to a special celebration</p>
 
-            <p class="question">Will you be attending?</p>
+            <p class="question">How many of you will be attending?</p>
+
+            <div class="guest-count-container">
+                <select class="guest-select" v-model="guestCount">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
 
             <button class="rsvp-button" @click="submitRSVP">
                 I will be there
             </button>
-            <button class="non-rsvp-button" @click="submitNoRSVP">
-                No
-            </button>
-
-            <p class="under-text">Kindly note that you need to RSVP by 15th of October at the latest.</p>
         </div>
     </div>
 </template>
@@ -66,7 +69,7 @@ export default {
             // Update in Supabase
             const { data, error } = await supabase
                 .from('people')
-                .update({ 'guest': 1 })
+                .update({ 'guest': this.guestCount })
                 .eq('id', this.person.id)
 
             if (error) {
@@ -75,32 +78,10 @@ export default {
             } else {
                 Swal.fire(
                     'Thank you for your RSVP',
-                    `We have you down for this event`,
+                    `We have you down for ${this.guestCount} guest${this.guestCount > 1 ? 's' : ''}`,
                     'success'
                 );
-                // go to gift page.
-                this.$router.push({ path: `/gift` });
-            }
-        },
-
-        async submitNoRSVP() {
-            // Update in Supabase
-            const { data, error } = await supabase
-                .from('people')
-                .update({ 'guest': null })
-                .eq('id', this.person.id)
-
-            if (error) {
-                Swal.fire('Error', `We could not update your list ${error}`, 'error')
-                return;
-            } else {
-                Swal.fire(
-                    'Thank you for letting us know',
-                    `We look forward to having you in another event`,
-                    'success'
-                );
-                // go to gift page.
-                this.$router.push({ path: `/gift` });
+                this.$router.push({ path: `/invite/${this.person.id}` });
             }
         }
     }
@@ -116,12 +97,6 @@ export default {
     align-items: center;
     justify-content: center;
     padding: 20px;
-}
-
-.under-text {
-    font-style: italic;
-    font-size: 12px;
-    margin-top: 10px;
 }
 
 .invitation-card {
@@ -214,22 +189,6 @@ export default {
     font-weight: 500;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-}
-
-.non-rsvp-button {
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-color));
-    color: var(--white);
-    border: none;
-    padding: 16px 40px;
-    font-size: 1.1rem;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-left: 10px;
     box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
 }
 
