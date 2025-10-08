@@ -6,7 +6,6 @@
             </a>
             <button class="btn position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
                 <i class="fas fa-shopping-cart" style="font-size: 1.5rem; color: #333;"></i>
-                <!-- Replace id with Vue binding -->
                 <span class="cart-badge">{{ cart.length }}</span>
             </button>
         </div>
@@ -14,27 +13,58 @@
 
     <div class="container">
         <div class="header-section">
-            <h1>EDEH's Gift Registry</h1>
+            <h1>Ebubedike's Gift Registry</h1>
             <p>Browse through the curated list of birthday gifts</p>
         </div>
 
-        <button class="filter-btn">
-            <i class="fas fa-filter"></i> Filter by Category
-        </button>
+        <!-- Filter Dropdown -->
+        <div class="dropdown" style="margin-bottom: 2rem;">
+            <button class="filter-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-filter"></i> 
+                {{ selectedCategory === 'all' ? 'Filter by Category' : categories.find(c => c.value === selectedCategory)?.label }}
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item" :class="{ active: selectedCategory === 'all' }" 
+                       @click="filterByCategory('all')" href="javascript:void(0)">
+                        All Categories
+                    </a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li v-for="category in categories" :key="category.value">
+                    <a class="dropdown-item" :class="{ active: selectedCategory === category.value }" 
+                       @click="filterByCategory(category.value)" href="javascript:void(0)">
+                        {{ category.label }}
+                    </a>
+                </li>
+            </ul>
+        </div>
 
         <div class="row g-4">
             <!-- Cash Gift Card -->
-            
+            <div class="col-md-6 col-lg-3" v-if="selectedCategory === 'all' || selectedCategory === 'cash'">
+                <div class="card gift-card cash-gift">
+                    <div class="card-body text-center">
+                        <i class="fas fa-heart card-icon"></i>
+                        <h5 class="card-title">Cash Gift</h5>
+                        <p class="card-text text-muted">Bless My Next Chapter / Celebration Fund</p>
+                        <input type="number" class="cash-gift-input" v-model="cashAmount" placeholder="Enter amount (₦)">
+                        <small class="d-block text-muted mb-3">Amount in Nigerian Naira (₦)</small>
+                        <button class="btn btn-add-cart" @click="addCashGift">
+                            <i class="fas fa-heart me-2"></i> Add Gift to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-            <!-- Cushion Cover -->
-            <div class="col-md-6 col-lg-3" v-for="gift in gifts">
+            <!-- Dynamic Gift Cards -->
+            <div class="col-md-6 col-lg-3" v-for="gift in filteredGifts" :key="gift.title">
                 <div class="card gift-card">
-                    <img :src="gift.img"
-                        alt="Cushion Cover">
+                    <img :src="gift.img" :alt="gift.title">
                     <div class="card-body">
-                        <h5 class="card-title">{{gift.title}}</h5>
+                        <h5 class="card-title">{{ gift.title }}</h5>
                         <p class="card-text text-muted">{{ gift.description }}</p>
-                        <p class="gift-price">₦{{ gift.price }}</p>
+                        <p class="gift-price">₦{{ gift.price.toLocaleString() }}</p>
                         <button class="btn btn-add-cart"
                             @click="addToCart(gift.title, gift.title, gift.price, gift.img)">
                             <i class="fas fa-shopping-cart me-2"></i> Add to Cart
@@ -42,11 +72,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- African Luxury Fabrics -->
-
-            <!-- Spa Voucher -->
-            
         </div>
     </div>
 
@@ -54,15 +79,18 @@
     <div class="offcanvas offcanvas-end cart-offcanvas" tabindex="-1" id="cartOffcanvas">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title">Your Cart</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas">
+                <i class="fas fa-times remove-btn"></i>
+            </button>
         </div>
         <div class="offcanvas-body">
-            <!-- Replace innerHTML with Vue template -->
+            <!-- Empty Cart -->
             <div v-if="cart.length === 0" class="empty-cart">
                 <i class="fas fa-shopping-cart" style="font-size: 4rem;"></i>
                 <p class="mt-3">Your cart is empty</p>
             </div>
-
+            
+            <!-- Cart Items -->
             <div v-else>
                 <div v-for="(item, index) in cart" :key="index" class="cart-item">
                     <div class="d-flex justify-content-between align-items-center">
@@ -99,18 +127,148 @@ export default {
     data() {
         return {
             cart: [],
-            gifts: [
+            cashAmount: '',
+            selectedCategory: 'all',
+            allGifts: [
                 {
-                    img: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=400&h=300&fit=crop',
-                    title: 'Cushion Cover',
-                    description: 'Contemporary Geometric Cushion Cover x 12pcs',
-                    price: 50000
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/58/660869/1.jpg?1766',
+                    title: 'Martell',
+                    description: 'Martell Cognac XO 70cl',
+                    price: 245000,
+                    category: 'drinks'
                 },
                 {
-                    img: 'https://images.unsplash.com/photo-1509551388413-e18d0ac5d495?w=400&h=300&fit=crop',
-                    title: 'African Luxury Fabrics (Singles)',
-                    description: 'Dutch Wax Ankara Singles',
-                    price: 60000
+                    img: 'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/56/412838/1.jpg?5417',
+                    title: 'Johnnie Walker',
+                    description: 'Johnnie Walker Blue Label 70cl',
+                    price: 320000,
+                    category: 'drinks'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/84/1028722/1.jpg?7362',
+                    title: 'The Macallan',
+                    description: 'The Macallan Rare Cask 70cl',
+                    price: 314000,
+                    category: 'drinks'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/43/760869/1.jpg?2255',
+                    title: 'The Chivas',
+                    description: 'Chivas Scotch Whiskey Regal Ultra 25YO 70cl',
+                    price: 355000,
+                    category: 'drinks'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/94/5437783/1.jpg?0486',
+                    title: 'Forecast',
+                    description: 'Forecast Classy & Sophisticated Diamond Iced Silver Wristwatch',
+                    price: 270000,
+                    category: 'watch'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/84/5436814/1.jpg?7484',
+                    title: 'OEDAGAR',
+                    description: `OEDAGAR Super Premium Men's Black Valenzo Wristwatch`,
+                    price: 590000,
+                    category: 'watch'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/94/0469262/1.jpg?3819',
+                    title: 'Longchain',
+                    description: `Longchain Diamond Silver Steel Necklace & Wristwatch/Ring`,
+                    price: 390000,
+                    category: 'watch'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/50/7632452/1.jpg?5997',
+                    title: 'SMART WATCH',
+                    description: `T55 SMART WATCH T55`,
+                    price: 200000,
+                    category: 'gadget'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/53/4485814/1.jpg?8951',
+                    title: 'Gift Box',
+                    description: `Men’s Wrist Watch Gift Set`,
+                    price: 22500,
+                    category: 'gift set'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/27/7851072/1.jpg?7914',
+                    title: 'Corporate Gift Set',
+                    description: `Notebook Pen Flash Drive Water Flask`,
+                    price: 42500,
+                    category: 'gift set'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/89/8361583/1.jpg?9271',
+                    title: 'Callaway',
+                    description: `Men's 2024 Chev Star Spikeless`,
+                    price: 250000,
+                    category: 'shoes'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/95/2104962/1.jpg?6313',
+                    title: 'Mister',
+                    description: `Mister Exotic Men's Patterned Shoes`,
+                    price: 256000,
+                    category: 'shoes'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/47/6996704/1.jpg?7284',
+                    title: 'Leather Bag',
+                    description: `Men's Leather Bag`,
+                    price: 70000,
+                    category: 'bag'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/34/2226814/1.jpg?0383',
+                    title: 'Mens Suede',
+                    description: `UGG's Men's Suede Cross Leather Slippers`,
+                    price: 100000,
+                    category: 'shoes'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/31/2424314/1.jpg?9972',
+                    title: 'Turkey Suite',
+                    description: `Chief Turkey 3 Piece Executive Suit`,
+                    price: 250000,
+                    category: 'suite'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/73/183877/1.jpg?7709',
+                    title: 'Executive Suite',
+                    description: `Executive Men's Suit`,
+                    price: 690000,
+                    category: 'suite'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/07/9159863/1.jpg?3105',
+                    title: 'Spa Sessions',
+                    description: `Spa / Massage Gift Voucher`,
+                    price: 50000,
+                    category: 'adventure'
+                },
+                {
+                    img: 'https://images.unsplash.com/photo-1614350391736-ed8619d63c06?q=80&w=1333&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                    title: 'Dinner Cruise',
+                    description: `Dinner Cruise Adventure`,
+                    price: 1000000,
+                    category: 'adventure'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/34/8616942/1.jpg?5042',
+                    title: 'Macbook Air',
+                    description: `Apple 13.6" MacBook Air (M2, Midnight) `,
+                    price: 1550000,
+                    category: 'gadget'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/27/9682814/1.jpg?4533',
+                    title: 'iPad Pro',
+                    description: `Apple iPad Pro 11" M4`,
+                    price: 1771000,
+                    category: 'gadget'
                 },
             ]
         }
@@ -119,10 +277,38 @@ export default {
     computed: {
         cartTotal() {
             return this.cart.reduce((sum, item) => sum + item.price, 0);
+        },
+
+        filteredGifts() {
+            if (this.selectedCategory === 'all') {
+                return this.allGifts;
+            }
+            return this.allGifts.filter(gift => gift.category === this.selectedCategory);
+        },
+
+        categories() {
+            // Get unique categories from gifts
+            const uniqueCategories = [...new Set(this.allGifts.map(gift => gift.category))];
+            return uniqueCategories.map(cat => ({
+                value: cat,
+                label: this.formatCategoryLabel(cat)
+            }));
         }
     },
 
     methods: {
+        formatCategoryLabel(category) {
+            // Capitalize first letter of each word
+            return category
+                .split('-')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+        },
+
+        filterByCategory(category) {
+            this.selectedCategory = category;
+        },
+
         addToCart(id, name, price, image) {
             this.cart.push({ id, name, price, image });
 
@@ -131,15 +317,16 @@ export default {
         },
 
         addCashGift() {
-            const amount = parseFloat(document.getElementById('cashAmount').value);
-
+            const amount = parseFloat(this.cashAmount);
+            
             if (!amount || amount <= 0) {
                 alert('Please enter a valid amount');
                 return;
             }
 
-            this.addToCart('cash', `Cash Gift (₦${amount.toLocaleString()})`, amount, 'https://images.unsplash.com/photo-1607863680198-23d4b2565df0?w=400&h=300&fit=crop');
-            document.getElementById('cashAmount').value = '';
+            this.addToCart('cash', `Cash Gift (₦${amount.toLocaleString()})`, amount, 
+                'https://images.unsplash.com/photo-1607863680198-23d4b2565df0?w=400&h=300&fit=crop');
+            this.cashAmount = '';
         },
 
         removeFromCart(index) {
