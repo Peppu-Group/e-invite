@@ -20,20 +20,23 @@
         <!-- Filter Dropdown -->
         <div class="dropdown" style="margin-bottom: 2rem;">
             <button class="filter-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-filter"></i> 
-                {{ selectedCategory === 'all' ? 'Filter by Category' : categories.find(c => c.value === selectedCategory)?.label }}
+                <i class="fas fa-filter"></i>
+                {{ selectedCategory === 'all' ? 'Filter by Category' : categories.find(c => c.value ===
+                    selectedCategory)?.label }}
             </button>
             <ul class="dropdown-menu">
                 <li>
-                    <a class="dropdown-item" :class="{ active: selectedCategory === 'all' }" 
-                       @click="filterByCategory('all')" href="javascript:void(0)">
+                    <a class="dropdown-item" :class="{ active: selectedCategory === 'all' }"
+                        @click="filterByCategory('all')" href="javascript:void(0)">
                         All Categories
                     </a>
                 </li>
-                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
                 <li v-for="category in categories" :key="category.value">
-                    <a class="dropdown-item" :class="{ active: selectedCategory === category.value }" 
-                       @click="filterByCategory(category.value)" href="javascript:void(0)">
+                    <a class="dropdown-item" :class="{ active: selectedCategory === category.value }"
+                        @click="filterByCategory(category.value)" href="javascript:void(0)">
                         {{ category.label }}
                     </a>
                 </li>
@@ -65,8 +68,7 @@
                         <h5 class="card-title">{{ gift.title }}</h5>
                         <p class="card-text text-muted">{{ gift.description }}</p>
                         <p class="gift-price">₦{{ gift.price.toLocaleString() }}</p>
-                        <button class="btn btn-add-cart"
-                            @click="addToCart(gift.title, gift.title, gift.price, gift.img)">
+                        <button class="btn btn-add-cart" @click="addToCart(gift.title, gift.title, gift.price, gift.img)">
                             <i class="fas fa-shopping-cart me-2"></i> Add to Cart
                         </button>
                     </div>
@@ -89,7 +91,7 @@
                 <i class="fas fa-shopping-cart" style="font-size: 4rem;"></i>
                 <p class="mt-3">Your cart is empty</p>
             </div>
-            
+
             <!-- Cart Items -->
             <div v-else>
                 <div v-for="(item, index) in cart" :key="index" class="cart-item">
@@ -138,25 +140,18 @@ export default {
                     category: 'drinks'
                 },
                 {
-                    img: 'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/56/412838/1.jpg?5417',
-                    title: 'Johnnie Walker',
-                    description: 'Johnnie Walker Blue Label 70cl',
-                    price: 320000,
-                    category: 'drinks'
+                    img: 'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/73/183877/1.jpg?7709',
+                    title: 'Executive Suite',
+                    description: `Executive Men's Suit`,
+                    price: 690000,
+                    category: 'suite'
                 },
                 {
-                    img: 'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/84/1028722/1.jpg?7362',
-                    title: 'The Macallan',
-                    description: 'The Macallan Rare Cask 70cl',
-                    price: 314000,
-                    category: 'drinks'
-                },
-                {
-                    img: 'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/43/760869/1.jpg?2255',
-                    title: 'The Chivas',
-                    description: 'Chivas Scotch Whiskey Regal Ultra 25YO 70cl',
-                    price: 355000,
-                    category: 'drinks'
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/34/2226814/1.jpg?0383',
+                    title: 'Mens Suede',
+                    description: `UGG's Men's Suede Cross Leather Slippers`,
+                    price: 100000,
+                    category: 'shoes'
                 },
                 {
                     img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/94/5437783/1.jpg?0486',
@@ -166,18 +161,11 @@ export default {
                     category: 'watch'
                 },
                 {
-                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/84/5436814/1.jpg?7484',
-                    title: 'OEDAGAR',
-                    description: `OEDAGAR Super Premium Men's Black Valenzo Wristwatch`,
-                    price: 590000,
-                    category: 'watch'
-                },
-                {
-                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/94/0469262/1.jpg?3819',
-                    title: 'Longchain',
-                    description: `Longchain Diamond Silver Steel Necklace & Wristwatch/Ring`,
-                    price: 390000,
-                    category: 'watch'
+                    img: 'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/84/1028722/1.jpg?7362',
+                    title: 'The Macallan',
+                    description: 'The Macallan Rare Cask 70cl',
+                    price: 314000,
+                    category: 'drinks'
                 },
                 {
                     img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/50/7632452/1.jpg?5997',
@@ -222,11 +210,18 @@ export default {
                     category: 'bag'
                 },
                 {
-                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/34/2226814/1.jpg?0383',
-                    title: 'Mens Suede',
-                    description: `UGG's Men's Suede Cross Leather Slippers`,
-                    price: 100000,
-                    category: 'shoes'
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/84/5436814/1.jpg?7484',
+                    title: 'OEDAGAR',
+                    description: `OEDAGAR Super Premium Men's Black Valenzo Wristwatch`,
+                    price: 590000,
+                    category: 'watch'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/56/412838/1.jpg?5417',
+                    title: 'Johnnie Walker',
+                    description: 'Johnnie Walker Blue Label 70cl',
+                    price: 320000,
+                    category: 'drinks'
                 },
                 {
                     img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/31/2424314/1.jpg?9972',
@@ -236,18 +231,18 @@ export default {
                     category: 'suite'
                 },
                 {
-                    img: 'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/73/183877/1.jpg?7709',
-                    title: 'Executive Suite',
-                    description: `Executive Men's Suit`,
-                    price: 690000,
-                    category: 'suite'
-                },
-                {
                     img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/07/9159863/1.jpg?3105',
                     title: 'Spa Sessions',
                     description: `Spa / Massage Gift Voucher`,
                     price: 50000,
                     category: 'adventure'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/94/0469262/1.jpg?3819',
+                    title: 'Longchain',
+                    description: `Longchain Diamond Silver Steel Necklace & Wristwatch/Ring`,
+                    price: 390000,
+                    category: 'watch'
                 },
                 {
                     img: 'https://images.unsplash.com/photo-1614350391736-ed8619d63c06?q=80&w=1333&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -262,6 +257,13 @@ export default {
                     description: `Apple 13.6" MacBook Air (M2, Midnight) `,
                     price: 1550000,
                     category: 'gadget'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/43/760869/1.jpg?2255',
+                    title: 'The Chivas',
+                    description: 'Chivas Scotch Whiskey Regal Ultra 25YO 70cl',
+                    price: 355000,
+                    category: 'drinks'
                 },
                 {
                     img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/27/9682814/1.jpg?4533',
@@ -318,13 +320,13 @@ export default {
 
         addCashGift() {
             const amount = parseFloat(this.cashAmount);
-            
+
             if (!amount || amount <= 0) {
                 alert('Please enter a valid amount');
                 return;
             }
 
-            this.addToCart('cash', `Cash Gift (₦${amount.toLocaleString()})`, amount, 
+            this.addToCart('cash', `Cash Gift (₦${amount.toLocaleString()})`, amount,
                 'https://images.unsplash.com/photo-1607863680198-23d4b2565df0?w=400&h=300&fit=crop');
             this.cashAmount = '';
         },
@@ -339,11 +341,27 @@ export default {
                 return;
             }
 
-            alert('Thank you for your generous gift! Total: ₦' + this.cartTotal.toLocaleString());
-            this.cart = [];
+            this.payWithPaystack(this.cartTotal)
+        },
 
-            const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('cartOffcanvas'));
-            offcanvas.hide();
+        payWithPaystack(amount) {
+            let handler = PaystackPop.setup({
+                key: import.meta.env.VITE_APP_PAYSTACK, // your public key
+                email: 'users@peppubuild.com',
+                amount: amount * 100, // convert to kobo
+                currency: 'NGN',
+                callback: function (response) {
+                    Swal.fire('Success', `Payment successful. Ref: ${response.reference}`, 'success')
+                    this.cart = [];
+
+                    const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('cartOffcanvas'));
+                    offcanvas.hide();
+                },
+                onClose: function () {
+                    Swal.fire('Error', 'Transaction was not completed', 'error');
+                }
+            });
+            handler.openIframe();
         }
     }
 }
