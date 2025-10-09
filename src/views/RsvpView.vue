@@ -50,7 +50,7 @@
                         <div class="contact-info">
                             <p><strong>Questions about your invitation?</strong></p>
                             <p>Please contact our wedding coordinator:</p>
-                            <p class="contact-details">3030events.ng<br>+2348037802712</p>
+                            <p class="contact-details">EventLord Events<br>+2348101111091</p>
                         </div>
                     </div>
                 </div>

@@ -87,7 +87,7 @@
                         <div class="contact-info">
                             <p><strong>Questions about your invitation?</strong></p>
                             <p>Please contact our wedding coordinator:</p>
-                            <p class="contact-details">3030events.ng<br>+2348037802712</p>
+                            <p class="contact-details">EventLord Events<br>2348101111091</p>
                         </div>
                     </div>
                 </div>
@@ -133,7 +133,7 @@ export default {
                 time: "at two o'clock in the afternoon",
                 venueName: "VENUE: Brownhills Event Center",
                 address: "Ogunu Warri, Delta state",
-                rsvpTitle: "RSVP: 3030.ng Event Planner",
+                rsvpTitle: "RSVP: EventLord Events",
                 rsvpContact: "+2349077098636"
             }
         }
