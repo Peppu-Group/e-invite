@@ -3,30 +3,61 @@
         <div v-if="isLoading" class="loading-overlay">
             <div class="loading-content">
                 <div class="loading-ring"></div>
-                <h3>Loading Wedding RSVP...</h3>
+                <h3>Loading Event RSVP...</h3>
                 <p>Preparing something beautiful ✨</p>
             </div>
         </div>
         <div v-else class="invitation-card">
-            <h1 class="couple-names"> {{ person.name }} </h1>
+            <div v-if="person">
+                <h1 class="couple-names"> {{ person.name }} </h1>
 
-            <div class="decorative-line"></div>
+                <div class="decorative-line"></div>
 
-            <p class="invitation-text">You are invited to a special celebration</p>
+                <p class="invitation-text">You are invited to a special celebration</p>
 
-            <p class="question">How many of you will be attending?</p>
+                <p class="question">How many of you will be attending?</p>
 
-            <div class="guest-count-container">
-                <select class="guest-select" v-model="guestCount">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
+                <div class="guest-count-container">
+                    <select class="guest-select" v-model="guestCount">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+
+                <button class="rsvp-button" @click="submitRSVP">
+                    I will be there
+                </button>
             </div>
+            <!-- Access Denied Screen -->
+            <div v-else class="access-denied-container">
+                <div class="denied-card">
+                    <div class="denied-header">
+                        <div class="denied-icon">🚫</div>
+                        <h2>Access Restricted</h2>
+                    </div>
 
-            <button class="rsvp-button" @click="submitRSVP">
-                I will be there
-            </button>
+                    <div class="denied-content">
+                        <div class="denied-message">
+                            <h3>We're Sorry</h3>
+                            <p>Your name is not found in our Event guest registry.</p>
+                            <p>This invitation is exclusive to our invited guests only.</p>
+                        </div>
+
+                        <div class="denied-decoration">
+                            <div class="denied-ornament">❀</div>
+                            <div class="denied-line"></div>
+                            <div class="denied-ornament">❀</div>
+                        </div>
+
+                        <div class="contact-info">
+                            <p><strong>Questions about your invitation?</strong></p>
+                            <p>Please contact our wedding coordinator:</p>
+                            <p class="contact-details">3030events.ng<br>+2348037802712</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>

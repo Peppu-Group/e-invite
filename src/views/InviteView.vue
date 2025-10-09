@@ -3,7 +3,7 @@
         <div v-if="isLoading" class="loading-overlay">
             <div class="loading-content">
                 <div class="loading-ring"></div>
-                <h3>Loading Wedding Invitation...</h3>
+                <h3>Loading Event Invitation...</h3>
                 <p>Preparing something beautiful ✨</p>
             </div>
         </div>
@@ -74,7 +74,7 @@
                     <div class="denied-content">
                         <div class="denied-message">
                             <h3>We're Sorry</h3>
-                            <p>Your name is not found in our wedding guest registry.</p>
+                            <p>Your name is not found in our Event guest registry.</p>
                             <p>This invitation is exclusive to our invited guests only.</p>
                         </div>
 
@@ -126,7 +126,7 @@ export default {
                         cordially invite:`,
                 ndaText: 'Please note: Photography and video recording are not permitted during the ceremony. We kindly ask all guests to honor this request.',
                 invitedGuest: this.person.name,
-                eventType: "to the Wedding of",
+                eventType: "to the Event of",
                 bride: "Chidimma",
                 groom: "Dama",
                 date: "26th September, 2025",
@@ -207,7 +207,7 @@ export default {
         addToCalendar() {
             const data = this.invitationData;
             const eventDetails = {
-                title: `Chidima & ${data.groom} Wedding`,
+                title: `Chidima & ${data.groom} Event`,
                 start: '20250926T140000Z', // UTC format
                 end: '20250926T180000Z',
                 location: `${data.venueName}, ${data.address}`,

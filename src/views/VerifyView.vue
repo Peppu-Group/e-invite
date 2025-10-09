@@ -2,7 +2,7 @@
     <div v-if="isLoading" class="loading-overlay">
         <div class="loading-content">
             <div class="loading-ring"></div>
-            <h3>Loading Wedding RSVP...</h3>
+            <h3>Loading Event RSVP...</h3>
             <p>Preparing something beautiful ✨</p>
         </div>
     </div>

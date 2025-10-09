@@ -8,22 +8,53 @@
             </div>
         </div>
         <div v-else class="invitation-card">
-            <h1 class="couple-names"> {{ person.name }} </h1>
+            <div v-if="person">
+                <h1 class="couple-names"> {{ person.name }} </h1>
 
-            <div class="decorative-line"></div>
+                <div class="decorative-line"></div>
 
-            <p class="invitation-text">You are invited to Edeh's birthday</p>
+                <p class="invitation-text">You are invited to Ebubedikeh's birthday</p>
 
-            <p class="question">Will you be attending?</p>
+                <p class="question">Will you be attending?</p>
 
-            <button class="rsvp-button" @click="submitRSVP">
-                I will be there
-            </button>
-            <button class="non-rsvp-button" @click="submitNoRSVP">
-                No
-            </button>
+                <button class="rsvp-button" @click="submitRSVP">
+                    I will be there
+                </button>
+                <button class="non-rsvp-button" @click="submitNoRSVP">
+                    No
+                </button>
 
-            <p class="under-text">Kindly note that you need to RSVP by 15th of October at the latest.</p>
+                <p class="under-text">Kindly note that you need to RSVP by 15th of October at the latest.</p>
+            </div>
+            <!-- Access Denied Screen -->
+            <div v-else class="access-denied-container">
+                <div class="denied-card">
+                    <div class="denied-header">
+                        <div class="denied-icon">🚫</div>
+                        <h2>Access Restricted</h2>
+                    </div>
+
+                    <div class="denied-content">
+                        <div class="denied-message">
+                            <h3>We're Sorry</h3>
+                            <p>Your name is not found in our Event guest registry.</p>
+                            <p>This invitation is exclusive to our invited guests only.</p>
+                        </div>
+
+                        <div class="denied-decoration">
+                            <div class="denied-ornament">❀</div>
+                            <div class="denied-line"></div>
+                            <div class="denied-ornament">❀</div>
+                        </div>
+
+                        <div class="contact-info">
+                            <p><strong>Questions about your invitation?</strong></p>
+                            <p>Please contact our wedding coordinator:</p>
+                            <p class="contact-details">3030events.ng<br>+2348037802712</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
