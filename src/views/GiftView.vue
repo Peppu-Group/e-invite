@@ -154,11 +154,11 @@ export default {
                     category: 'shoes'
                 },
                 {
-                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/94/5437783/1.jpg?0486',
-                    title: 'Forecast',
-                    description: 'Forecast Classy & Sophisticated Diamond Iced Silver Wristwatch',
-                    price: 270000,
-                    category: 'watch'
+                    img: 'https://fragrances.com.ng/media/catalog/product/cache/0daeb07bb1d294c1f281fab47369d56a/c/h/christian_dior_sauvage_parfum_200ml_large_size_for_men2.jpg',
+                    title: 'Christian Dior Sauvage',
+                    description: 'Christian Dior Sauvage Parfum 200ml (Large Size) For Men',
+                    price: 474999,
+                    category: 'perfume'
                 },
                 {
                     img: 'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/84/1028722/1.jpg?7362',
@@ -168,18 +168,25 @@ export default {
                     category: 'drinks'
                 },
                 {
-                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/50/7632452/1.jpg?5997',
-                    title: 'SMART WATCH',
-                    description: `T55 SMART WATCH T55`,
-                    price: 200000,
+                    img: 'https://fragrances.com.ng/media/catalog/product/cache/0daeb07bb1d294c1f281fab47369d56a/t/o/tom_ford_ombre_leather_edp_100ml_for_men.jpeg',
+                    title: 'Tom Ford Ombre Leather',
+                    description: `Tom Ford Ombre Leather EDP 100ml Perfume For Men`,
+                    price: 349999,
+                    category: 'perfume'
+                },
+                {
+                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/98/3567814/1.jpg?2625',
+                    title: 'iPhone 17 Pro Max',
+                    description: `Apple iPhone 17 Pro Max`,
+                    price: 3000000,
                     category: 'gadget'
                 },
                 {
-                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/53/4485814/1.jpg?8951',
-                    title: 'Gift Box',
-                    description: `Men’s Wrist Watch Gift Set`,
-                    price: 22500,
-                    category: 'gift set'
+                    img: 'https://fragrances.com.ng/media/catalog/product/cache/0daeb07bb1d294c1f281fab47369d56a/l/o/louis_vuitton_ombre_nomade_edp_100ml.jpeg',
+                    title: 'Ombre Nomade',
+                    description: `louis Vuitton Ombre Nomade EDP 100ml`,
+                    price: 1199999,
+                    category: 'perfume'
                 },
                 {
                     img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/27/7851072/1.jpg?7914',
@@ -234,15 +241,15 @@ export default {
                     img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/07/9159863/1.jpg?3105',
                     title: 'Spa Sessions',
                     description: `Spa / Massage Gift Voucher`,
-                    price: 50000,
+                    price: 300000,
                     category: 'adventure'
                 },
                 {
-                    img: 'https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/94/0469262/1.jpg?3819',
-                    title: 'Longchain',
-                    description: `Longchain Diamond Silver Steel Necklace & Wristwatch/Ring`,
-                    price: 390000,
-                    category: 'watch'
+                    img: 'https://fragrances.com.ng/media/catalog/product/cache/0daeb07bb1d294c1f281fab47369d56a/b/o/boadicea_the_victorious_nebulous_edp_100ml_perfume.jpg',
+                    title: 'The Victorious Nebulous',
+                    description: `Boadicea The Victorious Nebulous EDP 100ml Perfume`,
+                    price: 3699999,
+                    category: 'perfume'
                 },
                 {
                     img: 'https://images.unsplash.com/photo-1614350391736-ed8619d63c06?q=80&w=1333&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
