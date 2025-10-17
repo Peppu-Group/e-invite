@@ -67,30 +67,27 @@ export default {
     data() {
         return {
             isLoading: true,
-            person: null,
+            person: undefined,
+            sparkles: [],
+            sparkleId: 0,
+            fetchAttempts: 0,
+            maxAttempts: 3,
             guestCount: '1'
         };
     },
     async created() {
-        const { data, error } = await supabase
-            .from('people')
-            .select('*');
-
-        if (error) {
-            console.error('Error fetching crew:', error.message);
-            return [];
-        }
-
-        const id = this.$route.params.id;
-        this.person = data.find(p => p.id === id);
-        this.guestCount = this.person.guest;
+        await this.fetchPersonWithRetry();
     },
     mounted() {
-        // Simulate loading
-        setTimeout(() => {
-            this.isLoading = false;
-        }, 2000);
-
+        // Watch for person data to hide loading screen
+        this.$watch('person', (newVal) => {
+            if (newVal !== undefined) {
+                // Give a small delay for smooth transition
+                setTimeout(() => {
+                    this.isLoading = false;
+                }, 500);
+            }
+        });
     },
     methods: {
         async submitRSVP() {
@@ -133,6 +130,96 @@ export default {
                 // go to gift page.
                 this.$router.push({ path: `/gift` });
             }
+        },
+        async fetchPersonWithRetry() {
+            const id = this.$route.params.id;
+
+            while (this.fetchAttempts < this.maxAttempts) {
+                this.fetchAttempts++;
+
+                try {
+                    console.log(`Attempt ${this.fetchAttempts} to fetch person with id: ${id}`);
+
+                    const { data, error } = await supabase
+                        .from('people')
+                        .select('*')
+                        .eq('id', id)
+                        .single();
+
+                    if (error) {
+                        console.error(`Attempt ${this.fetchAttempts} failed:`, error.message);
+
+                        // Check if it's a network error
+                        if (error.message.includes('Failed to fetch') || error.message.includes('ERR_INTERNET_DISCONNECTED')) {
+                            console.warn('Network error detected, keeping loading state');
+                            this.isLoading = true;
+
+                            // If not the last attempt, wait before retrying
+                            if (this.fetchAttempts < this.maxAttempts) {
+                                await this.delay(2000);
+                                continue;
+                            }
+
+                            // Last attempt failed due to network error - keep loading
+                            return;
+                        }
+
+                        // If not the last attempt, wait before retrying
+                        if (this.fetchAttempts < this.maxAttempts) {
+                            await this.delay(2000);
+                            continue;
+                        }
+
+                        // Last attempt failed
+                        this.person = null;
+                        return;
+                    }
+
+                    // Success - person found
+                    if (data) {
+                        console.log('Person found:', data);
+                        this.person = data;
+                        this.guestCount = this.person.guest;
+                        return;
+                    }
+
+                    // No data but no error - person doesn't exist
+                    console.log('No person found with this ID');
+                    this.person = null;
+                    return;
+
+                } catch (err) {
+                    console.error(`Unexpected error on attempt ${this.fetchAttempts}:`, err);
+
+                    // Check if it's a network error
+                    if (err.message.includes('Failed to fetch') || err.message.includes('ERR_INTERNET_DISCONNECTED')) {
+                        console.warn('Network error detected, keeping loading state');
+                        this.isLoading = true;
+
+                        // If not the last attempt, wait before retrying
+                        if (this.fetchAttempts < this.maxAttempts) {
+                            await this.delay(2000);
+                            continue;
+                        }
+
+                        // Last attempt failed due to network error - keep loading
+                        return;
+                    }
+
+                    // If not the last attempt, wait before retrying
+                    if (this.fetchAttempts < this.maxAttempts) {
+                        await this.delay(2000);
+                        continue;
+                    }
+
+                    // Last attempt failed
+                    this.person = null;
+                    return;
+                }
+            }
+        },
+        delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
         }
     }
 }
