@@ -19,7 +19,8 @@
                 </div>
 
                 <div class="honoree">
-                    <h1>{{ 'BRIG GEN IGWE PATRICK OMOKE' }}</h1>
+                    <h1>{{ 'BRIG GEN' }}</h1>
+                    <h2>{{ 'IGWE PATRICK OMOKE' }}</h2>
                 </div>
 
                 <div class="details">
@@ -111,7 +112,10 @@
 .invitation-container {
     max-width: 700px;
     margin: 0 auto;
-    background-color: #164433;
+   background-image: linear-gradient(rgba(0, 0, 0, 0.0),
+            /* black overlay with 50% opacity */
+            rgba(0, 0, 0, 0.0)),
+        url('../assets/green-background.jpg');
     border: 8px solid #b8860b;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
@@ -163,12 +167,16 @@
 }
 
 .honoree h1 {
-    font-size: 28px;
+    font-size: 30px;
     color: #b8860b;
     letter-spacing: 3px;
     line-height: 1.4;
-    font-weight: normal;
+    font-weight: bolder;
 }
+
+.honoree h2 {
+        font-size: 26px;
+    }
 
 .event-text {
     font-size: 25px;
@@ -341,6 +349,10 @@
     }
 
     .honoree h1 {
+        font-size: 28px;
+    }
+
+    .honoree h2 {
         font-size: 24px;
     }
 
