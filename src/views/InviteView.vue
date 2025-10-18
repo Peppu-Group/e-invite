@@ -59,6 +59,10 @@
                     {{ invitationData.ndaText }}
                 </div>
 
+                <div class="event-text">
+                    EVENTLORD EVENTS
+                </div>
+
                 <div class="qr-container" style="display: none; text-align: center; margin-top: 20px;">
                     <canvas id="qr-code"></canvas>
                     <p style="font-size: 12px;">Scan to verify invite</p>
@@ -107,7 +111,7 @@
 .invitation-container {
     max-width: 700px;
     margin: 0 auto;
-    background-color: #fef9f3;
+    background-color: #164433;
     border: 8px solid #b8860b;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
@@ -115,7 +119,9 @@
     position: relative;
 }
 
-
+.invitation-container * {
+    color: #b8860b;
+}
 
 .header {
     text-align: center;
@@ -125,7 +131,7 @@
 .header h2 {
     font-size: 18px;
     letter-spacing: 4px;
-    color: #1a4d3a;
+    color: #b8860b;
     font-weight: 300;
     margin-bottom: 30px;
     text-transform: uppercase;
@@ -158,10 +164,15 @@
 
 .honoree h1 {
     font-size: 28px;
-    color: #164433;
+    color: #b8860b;
     letter-spacing: 3px;
     line-height: 1.4;
     font-weight: normal;
+}
+
+.event-text {
+    font-size: 25px;
+    text-align: center;
 }
 
 .details {
@@ -177,14 +188,14 @@
 
 .venue {
     font-size: 14px;
-    color: #333;
+    color: #b8860b;
     margin: 10px 0;
     line-height: 1.6;
 }
 
 .address {
     font-size: 13px;
-    color: #666;
+    color: #edce81;
     margin: 5px 0;
 }
 
@@ -197,7 +208,7 @@
 
 .cocktail {
     font-size: 13px;
-    color: #666;
+    color: #b8860b;
     margin-top: 8px;
 }
 
@@ -210,7 +221,7 @@
 .dress-code label {
     display: block;
     font-size: 12px;
-    color: #1a4d3a;
+    color: #b8860b;
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 8px;
@@ -275,7 +286,7 @@
 }
 
 .input-section h3 {
-    color: #1a4d3a;
+    color: #b8860b;
     font-size: 16px;
     margin-bottom: 15px;
     text-align: center;
@@ -288,7 +299,7 @@
 .form-group label {
     display: block;
     font-size: 12px;
-    color: #1a4d3a;
+    color: #b8860b;
     margin-bottom: 5px;
     font-weight: 600;
 }
@@ -395,7 +406,7 @@
     font-size: 14px;
     line-height: 1.6;
     margin-bottom: 30px;
-    color: black;
+    color: #b8860b;
     opacity: 0.8;
     padding-top: 10px;
     font-weight: bolder;
