@@ -42,17 +42,19 @@ export default {
         };
     },
     async created() {
+        const id = this.$route.params.id;
+
         const { data, error } = await supabase
             .from('people')
-            .select('*');
+            .select('*')
+            .eq('id', id)
 
         if (error) {
             console.error('Error fetching crew:', error.message);
             return [];
         }
 
-        const id = this.$route.params.id;
-        this.person = data.find(p => p.id === id);
+        this.person = data;
     },
     mounted() {
         // Simulate loading
