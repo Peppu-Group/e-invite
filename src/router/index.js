@@ -4,10 +4,13 @@ import InviteView from '../views/InviteView.vue'
 import VerifyView from '../views/VerifyView.vue'
 import RsvpView from '../views/RsvpView.vue'
 import GiftView from '../views/GiftView.vue'
+import EmailTemplate from '../views/EmailTemplate.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+      { path: '/', name: 'home', component: GiftView },
+      { path: '/email-template', name: 'email-template', component: EmailTemplate},
     {
       path: '/invite/:id',
       name: 'invite',
