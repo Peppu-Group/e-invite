@@ -16,6 +16,15 @@
     --primary-color: #E91E63;
     --secondary-color: #F8F3ED;
     --subtle-shadow: rgba(0, 0, 0, 0.08);
+      --primary: hsl(180, 65%, 45%);
+  --primary-dark: hsl(180, 65%, 35%);
+  --secondary: hsl(340, 75%, 60%);
+  --accent: hsl(200, 85%, 55%);
+  --background: hsl(0, 0%, 98%);
+  --text: hsl(220, 20%, 20%);
+  --text-light: hsl(220, 10%, 45%);
+  --gradient-start: hsl(180, 65%, 45%);
+  --gradient-end: hsl(170, 60%, 50%);
 }
 
 .foottext {
@@ -110,14 +119,14 @@ body {
 }
 */
 
-/* Ensure navbar collapse doesn't cause overflow */
+/* Ensure navbar collapse doesn't cause overflow 
 .navbar-collapse {
     flex-basis: 100%;
     flex-grow: 1;
     align-items: center;
-}
+}*/
 
-/* Fix for mobile navbar overflow */
+/* Fix for mobile navbar overflow
 @media (max-width: 991.98px) {
     .navbar-nav {
         flex-direction: column;
@@ -137,9 +146,9 @@ body {
     .hero-carousel .carousel-item {
         background-position: center;
     }
-}
+} */
 
-/* Additional small screen fixes */
+/* Additional small screen fixes 
 @media (max-width: 576px) {
     .navbar-brand {
         font-size: 1.2rem;
@@ -153,9 +162,9 @@ body {
     .hero-carousel .carousel-item {
         background-position: center;
     }
-}
+}*/
 
-/* Hero Section */
+/* Hero Section 
 .hero {
     height: 100vh;
     position: relative;
@@ -299,7 +308,7 @@ body {
     animation: floatHeart 12s infinite linear;
     opacity: 0.8;
 }
-
+*/
 /* Section Styling */
 .section {
     padding: 6rem 0;

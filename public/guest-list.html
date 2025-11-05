@@ -62,12 +62,10 @@
             <thead>
               <tr>
                 <th style="width:3%">#</th>
-                <th style="width:25%">Name</th>
-                <th style="width:20%">Email</th>
-                <th style="width:15%">Number</th>
-                <th style="width:5%">Guest-Count</th>
-                <th style="width:15%">Invitation Status</th>
-                <th style="width:17%">Action</th>
+                <th style="width:35%">Name</th>
+                <th style="width:22%">Email</th>
+                <th style="width:20%">Number</th>
+                <th style="width:20%">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -76,8 +74,6 @@
                 <td>{{ guest.name }}</td>
                 <td>{{ guest.email }}</td>
                 <td>{{ guest.number }}</td>
-                <td>{{ guest.count ? guest.count : 'N/A' }}</td>
-                <td>{{ guest.invitation ? guest.invitation : 'N/A' }}</td>
                 <td>
                   <button class="btn-delete" @click="deleteGuest(index)">Delete</button>
                   <button class="btn-invite" @click="deleteGuest(index)">Invite</button>

@@ -4,6 +4,7 @@ import InviteView from '../views/InviteView.vue'
 import VerifyView from '../views/VerifyView.vue'
 import RsvpView from '../views/RsvpView.vue'
 import GiftView from '../views/GiftView.vue'
+import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,6 +13,11 @@ const router = createRouter({
       path: '/invite/:id',
       name: 'invite',
       component: InviteView
+    },
+    {
+      path: '/',
+      name: 'home',
+      component: HomeView
     },
     {
       path: '/verify/:id',
