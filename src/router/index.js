@@ -5,6 +5,10 @@ import VerifyView from '../views/VerifyView.vue'
 import RsvpView from '../views/RsvpView.vue'
 import GiftView from '../views/GiftView.vue'
 import HomeView from '../views/HomeView.vue'
+import Dashboard from '../views/Dashboard.vue'
+import Event from '../views/Event.vue'
+import GuestList from '../views/GuestList.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +37,21 @@ const router = createRouter({
       path: '/gift',
       name: 'gift',
       component: GiftView
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: Dashboard
+    },
+    {
+      path: '/event/:id',
+      name: 'event',
+      component: Event
+    },
+    {
+      path: '/guest-manager',
+      name: 'guest',
+      component: GuestList
     }
   ]
 })

@@ -14,7 +14,7 @@
 
     <!-- Mobile Navigation -->
     <div class="mobile-nav" :class="{ active: mobileMenuOpen }">
-        <a href="#" class="mobile-nav-link">Dashboard</a>
+        <a href="/dashboard" class="mobile-nav-link">Dashboard</a>
     </div>
     <!-- Hero Section -->
     <section class="hero">
@@ -24,7 +24,7 @@
             <p class="subtitle">From RSVP to check-in, manage every detail of your event with ease. Track responses,
                 organize seating, handle plus ones, and communicate seamlessly.</p>
             <div class="cta-buttons">
-                <a href="/scanner.html" class="btn btn-primary">Start Managing Invites</a>
+                <a href="/dashboard" class="btn btn-primary">Start Managing Invites</a>
                 <a href="#features" class="btn btn-secondary">Learn More</a>
             </div>
         </div>
