@@ -42,7 +42,7 @@
                 </div>
                 <div class="nav-item" @click="closeMobileMenu">
                     <span class="nav-item-icon">👥</span>
-                    <span>Invite List</span>
+                    <router-link :to="{ name: 'guest' }" class='nothing'>Invite List</router-link>
                 </div>
             </div>
 
@@ -749,5 +749,10 @@ body {
     h2 {
         font-size: 22px !important;
     }
+}
+
+.nothing {
+    text-decoration: none;
+    color: inherit;
 }
 </style>

@@ -128,7 +128,7 @@
 <script>
 const { ref } = 'vue'; // <-- onMounted added
 export default {
-    name: 'Guest',
+    name: 'guest',
     data() {
         return {
             guests: [],
@@ -168,7 +168,7 @@ export default {
             lines.forEach(line => {
                 const parts = line.split(',').map(p => p.trim());
                 if (parts.length === 3 && parts[0] && parts[1] && parts[2]) {
-                    this.guests.value.push({ name: parts[0], email: parts[1], number: parts[2] });
+                    this.guests.push({ name: parts[0], email: parts[1], number: parts[2] });
                     added++;
                 }
             });
