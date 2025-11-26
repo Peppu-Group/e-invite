@@ -1,29 +1,6 @@
 <template>
     <div>
-        <!-- Navbar -->
-        <nav class="navbar">
-            <div class="navbar-brand">
-                <div class="brand-icon">✓</div>
-                <span>rsvpify</span>
-            </div>
-
-            <div class="navbar-menu">
-                <a href="#" class="nav-link active">Dashboard</a>
-                <a href="#" class="nav-link">Events</a>
-                <a href="#" class="nav-link">Analytics</a>
-                <a href="#" class="nav-link">Settings</a>
-            </div>
-
-            <div class="navbar-actions">
-                <button class="mobile-menu-btn" @click="toggleMobileMenu">☰</button>
-                <img :src="userAvatar" alt="User" class="user-avatar">
-            </div>
-        </nav>
-
-        <!-- Mobile Navigation -->
-        <div class="mobile-nav" :class="{ active: mobileMenuOpen }">
-            <a href="#" class="mobile-nav-link">Dashboard</a>
-        </div>
+        <NavBar/>
 
         <!-- Main Content -->
         <div class="container">
@@ -48,8 +25,8 @@
                 <div class="filter-tabs">
                     <button class="filter-tab" :class="{ active: activeFilter === 'all' }" @click="activeFilter = 'all'">All
                         Events</button>
-                    <button class="filter-tab" :class="{ active: activeFilter === 'upcoming' }"
-                        @click="activeFilter = 'upcoming'">Upcoming</button>
+                    <button class="filter-tab" :class="{ active: activeFilter === 'published' }"
+                        @click="activeFilter = 'upcoming'">Published</button>
                     <button class="filter-tab" :class="{ active: activeFilter === 'draft' }"
                         @click="activeFilter = 'draft'">Drafts</button>
                     <button class="filter-tab" :class="{ active: activeFilter === 'past' }"
@@ -61,7 +38,6 @@
             <div class="events-grid" v-if="filteredEvents.length > 0">
                 <div class="event-card" v-for="event in filteredEvents" :key="event.id"
                     @click="openEvent(event.id, event.status)">
-                    <div class="event-image">{{ event.emoji }}</div>
                     <div class="event-content">
                         <div class="event-header">
                             <div>
@@ -104,7 +80,7 @@
 </template>
 
 <script>
-
+import NavBar from '@/components/NavBar.vue';
 export default {
     name: 'Dashboard',
     data() {
@@ -116,6 +92,7 @@ export default {
             events: []
         };
     },
+    components: {NavBar},
     computed: {
         filteredEvents() {
             if (this.activeFilter === 'all') {
@@ -128,9 +105,6 @@ export default {
         this.events = JSON.parse(localStorage.getItem('eventList'));
     },
     methods: {
-        toggleMobileMenu() {
-            this.mobileMenuOpen = !this.mobileMenuOpen;
-        },
         createNewEvent() {
             alert('Create new event clicked! This would open the event creation flow.');
         },
@@ -147,128 +121,6 @@ export default {
 </script>
 
 <style scoped>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: #f5f7fa;
-    color: #2d3748;
-}
-
-/* Navbar */
-.navbar {
-    background: white;
-    border-bottom: 1px solid #e2e8f0;
-    padding: 0 40px;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.navbar-brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #1a202c;
-}
-
-.brand-icon {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 24px;
-}
-
-.navbar-menu {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
-
-.nav-link {
-    color: #4a5568;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 500;
-    transition: color 0.2s;
-}
-
-.nav-link:hover {
-    color: #667eea;
-}
-
-.nav-link.active {
-    color: #667eea;
-}
-
-.navbar-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.user-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    cursor: pointer;
-    border: 2px solid #e2e8f0;
-    transition: border-color 0.2s;
-}
-
-.user-avatar:hover {
-    border-color: #667eea;
-}
-
-.mobile-menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #4a5568;
-}
-
-.mobile-nav {
-    display: none;
-    position: fixed;
-    top: 70px;
-    left: 0;
-    right: 0;
-    background: white;
-    border-bottom: 1px solid #e2e8f0;
-    padding: 20px;
-    z-index: 99;
-}
-
-.mobile-nav.active {
-    display: block;
-}
-
-.mobile-nav-link {
-    display: block;
-    padding: 12px 0;
-    color: #4a5568;
-    text-decoration: none;
-    font-size: 16px;
-    border-bottom: 1px solid #f7fafc;
-}
 
 /* Main Content */
 .container {
@@ -295,7 +147,7 @@ body {
 
 /* Create Event CTA */
 .cta-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--primary-gold) 0%, var(--deep-gold) 100%);
     border-radius: 16px;
     padding: 40px;
     display: flex;
@@ -319,7 +171,7 @@ body {
 
 .btn-create {
     background: white;
-    color: #667eea;
+    color: var(--primary-gold);
     padding: 14px 32px;
     border-radius: 10px;
     border: none;
@@ -371,9 +223,9 @@ body {
 }
 
 .filter-tab.active {
-    background: #667eea;
+    background: var(--primary-gold);
     color: white;
-    border-color: #667eea;
+    border-color: var(--primary-gold);
 }
 
 .events-grid {
@@ -401,7 +253,7 @@ body {
     width: 100%;
     height: 200px;
     object-fit: cover;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--primary-gold) 0%, var(--deep-gold) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -520,17 +372,6 @@ body {
 }
 
 @media (max-width: 768px) {
-    .navbar {
-        padding: 0 20px;
-    }
-
-    .navbar-menu {
-        display: none;
-    }
-
-    .mobile-menu-btn {
-        display: block;
-    }
 
     .container {
         padding: 20px;
@@ -581,10 +422,6 @@ body {
 }
 
 @media (max-width: 480px) {
-    .navbar-brand span {
-        display: none;
-    }
-
     .page-title {
         font-size: 24px;
     }

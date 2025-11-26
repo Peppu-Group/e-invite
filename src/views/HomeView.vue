@@ -1,21 +1,6 @@
 <template>
     <!-- Navbar -->
-    <nav class="navbar">
-        <div class="navbar-brand">
-            <span>Peppu E-invite</span>
-        </div>
-
-        <div class="navbar-menu">
-            <a href="#" class="nav-link active">Dashboard</a>
-            <a href="#" class="nav-link">Pricing</a>
-            <a href="#" class="nav-link">Features</a>
-        </div>
-    </nav>
-
-    <!-- Mobile Navigation -->
-    <div class="mobile-nav" :class="{ active: mobileMenuOpen }">
-        <a href="/dashboard" class="mobile-nav-link">Dashboard</a>
-    </div>
+    <NavBar/>
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
@@ -208,7 +193,7 @@
             <h2>Ready to Transform Your Event Planning?</h2>
             <p>Join event planners who trust peppu e-invite for their guest management needs</p>
             <div class="cta-buttons">
-                <a href="/scanner.html" class="btn btn-primary">Get Started Now</a>
+                <a href="/dashboard" class="btn btn-primary">Get Started Now</a>
                 <a href="#" class="btn btn-secondary">Schedule a Demo</a>
             </div>
         </div>
@@ -223,18 +208,11 @@
 </template>
 
 <script>
+import NavBar from '@/components/NavBar.vue';
+
 export default {
     name: 'HomeView',
-    data() {
-        return {
-            mobileMenuOpen: false,
-        }
-    },
-    methods: {
-        toggleMobileMenu() {
-            this.mobileMenuOpen = !this.mobileMenuOpen;
-        },
-    }
+    components: {NavBar}
 }
 </script>
 
@@ -245,17 +223,9 @@ export default {
     box-sizing: border-box;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: var(--background);
-    color: var(--text);
-    line-height: 1.6;
-    overflow-x: hidden;
-}
-
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    background: linear-gradient(135deg, var(--primary-gold) 0%, var(--deep-gold) 100%);
     color: white;
     padding: 120px 20px 100px;
     text-align: center;
@@ -343,7 +313,7 @@ body {
 
 .btn-primary {
     background: white;
-    color: var(--primary);
+    color: var(--primary-gold);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
@@ -380,7 +350,7 @@ body {
     text-align: center;
     font-size: 2.8em;
     margin-bottom: 20px;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    background: linear-gradient(135deg, var(--primary-gold) 0%, var(--deep-gold) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -417,14 +387,14 @@ body {
 .feature-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-    border-color: var(--primary);
+    border-color: var(--primary-gold);
 }
 
 .feature-icon {
     width: 90px;
     height: 90px;
     margin: 0 auto 25px;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--gradient-end) 100%);
+    background: linear-gradient(135deg, var(--primary-gold) 0%, var(--deep-gold) 100%);
     border-radius: 24px;
     display: flex;
     align-items: center;
@@ -448,7 +418,7 @@ body {
 /* Stats Section */
 .stats-section {
     padding: 80px 20px;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--gradient-end) 100%);
+    background: linear-gradient(135deg, var(--cream) 0%, var(--cream) 100%);
     position: relative;
     overflow: hidden;
 }
@@ -531,7 +501,7 @@ body {
 .stat-number {
     font-size: 3.5em;
     font-weight: 800;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--gradient-end) 100%);
+    background: linear-gradient(135deg, var(--primary-gold) 0%, var(--deep-gold) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -595,7 +565,7 @@ body {
     transform: translate(-50%, -50%);
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--primary-gold) 0%, transparent 70%);
     opacity: 0.08;
     z-index: 0;
 }
@@ -632,7 +602,7 @@ body {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary) 0%, var(--gradient-end) 100%);
+    background: linear-gradient(90deg, var(--primary-gold) 0%, var(--deep-gold) 100%);
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
@@ -644,7 +614,7 @@ body {
 .comm-card:hover {
     transform: translateY(-12px);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
-    border-color: var(--primary);
+    border-color: var(--primary-gold);
 }
 
 .comm-icon {
@@ -682,7 +652,7 @@ body {
     padding: 25px;
     background: hsl(240, 20%, 99%);
     border-radius: 15px;
-    border-left: 4px solid var(--primary);
+    border-left: 4px solid var(--primary-gold);
     transition: all 0.3s ease;
 }
 
@@ -693,7 +663,7 @@ body {
 
 .benefit-check {
     font-size: 1.8em;
-    color: var(--primary);
+    color: var(--primary-gold);
     flex-shrink: 0;
 }
 
@@ -710,7 +680,7 @@ body {
 /* CTA Section */
 .cta-section {
     padding: 100px 20px;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--gradient-end) 100%);
+    background: linear-gradient(135deg, var(--primary-gold) 0%, var(--deep-gold) 100%);
     color: white;
     text-align: center;
     position: relative;
@@ -851,7 +821,7 @@ body {
 .brand-icon {
     width: 40px;
     height: 40px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--primary-gold) 0%, var(--deep-gold) 100%);
     border-radius: 10px;
     display: flex;
     align-items: center;
