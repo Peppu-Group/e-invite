@@ -8,14 +8,14 @@
             </div>
 
             <div class="navbar-menu">
-                <a href="#" class="nav-link active">Dashboard</a>
-                <a href="#" class="nav-link">Events</a>
-                <a href="#" class="nav-link">Analytics</a>
-                <a href="#" class="nav-link">Settings</a>
+                <a href="/" class="nav-link">Home</a>
+                <a href="/about" class="nav-link">About</a>
+                <a href="/pricing" class="nav-link">Pricing</a>
+                <a href="/dashboard" class="nav-link">Dashboard</a>
             </div>
 
             <div class="navbar-actions">
-                <img :src="userAvatar" alt="User" class="user-avatar">
+                <img v-if="showAvatar" :src="userAvatar" alt="User" class="user-avatar">
                 <button class="mobile-menu-btn" @click="toggleMobileMenu">
                     {{ mobileMenuOpen ? '✕' : '☰' }}
                 </button>
@@ -35,6 +35,12 @@
 <script>
 export default {
     name: 'NavBar',
+    props: {
+        showAvatar: {
+            type: Boolean,
+            default: false
+        }
+    },
     data() {
         return {
             userName: 'Sarah',

@@ -1,6 +1,6 @@
 <template>
     <!-- Navbar -->
-    <NavBar/>
+    <NavBar :showAvatar="false"/>
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
@@ -696,6 +696,12 @@ export default {
     bottom: 0;
     background: url('/peppu-feature2.jpg') center/cover no-repeat;
     opacity: 0.1;
+    z-index: 0;  /* Add this */
+}
+
+.cta-section .container {
+    position: relative;
+    z-index: 1;  /* Add this */
 }
 
 .cta-section h2 {

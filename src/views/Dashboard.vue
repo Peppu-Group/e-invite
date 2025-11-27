@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NavBar/>
+        <NavBar :showAvatar="true"/>
 
         <!-- Main Content -->
         <div class="container">
