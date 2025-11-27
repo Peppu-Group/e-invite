@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NavBar :showAvatar="true"/>
+        <NavBar :showAvatar="true" />
 
         <!-- Main Content -->
         <div class="container">
@@ -16,7 +16,7 @@
                     <h2>🎉 Ready to create something amazing?</h2>
                     <p>Start planning your next unforgettable event in just a few clicks</p>
                 </div>
-                <button class="btn-create" @click="createNewEvent">+ Create New Event</button>
+                <button class="btn-create" @click="createEventFormStyled">+ Create New Event</button>
             </div>
 
             <!-- Events Section -->
@@ -92,7 +92,7 @@ export default {
             events: []
         };
     },
-    components: {NavBar},
+    components: { NavBar },
     computed: {
         filteredEvents() {
             if (this.activeFilter === 'all') {
@@ -102,7 +102,7 @@ export default {
         }
     },
     mounted() {
-        this.events = JSON.parse(localStorage.getItem('eventList'));
+        this.events = JSON.parse(localStorage.getItem('eventList')) || [];
     },
     methods: {
         createNewEvent() {
@@ -115,13 +115,163 @@ export default {
             } else {
                 alert(`This should take you to the preview page of event ${eventId}.`);
             }
+        },
+        // Alternative: More styled version with custom CSS
+        async createEventFormStyled() {
+            // Add custom styles
+            const style = document.createElement('style');
+            style.textContent = `
+        .swal-custom-popup {
+            border-radius: 20px !important;
+            padding: 30px !important;
+        }
+        
+        .swal2-html-container {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        .swal2-input {
+            border: 2px solid #e2e8f0 !important;
+            border-radius: 12px !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .swal2-input:focus {
+            border-color: #00b4b4 !important;
+            box-shadow: 0 0 0 3px rgba(0, 180, 180, 0.1) !important;
+        }
+        
+        .swal-custom-confirm {
+            border-radius: 50px !important;
+            padding: 12px 35px !important;
+            font-weight: 600 !important;
+        }
+        
+        .swal-custom-cancel {
+            border-radius: 50px !important;
+            padding: 12px 35px !important;
+            font-weight: 600 !important;
+        }
+    `;
+            document.head.appendChild(style);
+
+            const { value: formValues } = await Swal.fire({
+                title: '<span style="background: linear-gradient(135deg, #00b4b4 0%, #008c8c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2em; font-weight: 700;">Create New Event</span>',
+                html: `
+            <div style="text-align: left; padding: 10px 20px;">
+                <div style="margin-bottom: 25px;">
+                    <label for="swal-event-title" style="display: block; margin-bottom: 10px; font-weight: 600; color: #2d3748; font-size: 1.05em;">
+                        📝 Event Title <span style="color: #e74c3c;">*</span>
+                    </label>
+                    <input 
+                        id="swal-event-title" 
+                        class="swal2-input" 
+                        placeholder="e.g., Annual Company Gala"
+                        style="width: 100%; margin: 0; padding: 14px; font-size: 1em;"
+                    >
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label for="swal-event-date" style="display: block; margin-bottom: 10px; font-weight: 600; color: #2d3748; font-size: 1.05em;">
+                        📅 Event Date <span style="color: #e74c3c;">*</span>
+                    </label>
+                    <input 
+                        id="swal-event-date" 
+                        type="date" 
+                        class="swal2-input"
+                        style="width: 100%; margin: 0; padding: 14px; font-size: 1em;"
+                        min="${new Date().toISOString().split('T')[0]}"
+                    >
+                </div>
+            </div>
+        `,
+                focusConfirm: false,
+                showCancelButton: true,
+                confirmButtonText: '✓ Create Event',
+                cancelButtonText: '✕ Cancel',
+                confirmButtonColor: '#00b4b4',
+                cancelButtonColor: '#94a3b8',
+                customClass: {
+                    popup: 'swal-custom-popup',
+                    confirmButton: 'swal-custom-confirm',
+                    cancelButton: 'swal-custom-cancel'
+                },
+                width: '500px',
+                preConfirm: () => {
+                    const title = document.getElementById('swal-event-title').value.trim();
+                    const date = document.getElementById('swal-event-date').value;
+
+                    if (!title || !date) {
+                        Swal.showValidationMessage('⚠️ Please fill in all required fields');
+                        return false;
+                    }
+
+                    if (title.length < 3) {
+                        Swal.showValidationMessage('⚠️ Event title must be at least 3 characters');
+                        return false;
+                    }
+
+                    return { title, date };
+                }
+            });
+
+            if (formValues) {
+                // send response to localstorage.
+                let nextId = this.events.length > 0
+                    ? this.events[this.events.length - 1].id + 1
+                    : 1;
+                let newEvent = {
+                    id: nextId,
+                    title: formValues.title,
+                    Confirmation: false,
+                    Form: false,
+                    Invite: false,
+                    Website: false,
+                    attendees: 0,
+                    date: new Date(formValues.date).toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    }),
+                    responses: 0,
+                    status: 'draft',
+                    views: 0
+                }
+                this.events.push(newEvent);
+                localStorage.setItem('eventList', JSON.stringify(this.events))
+                await Swal.fire({
+                    icon: 'success',
+                    title: '🎉 Event Created Successfully!',
+                    html: `
+                <div style="text-align: left; padding: 0 20px;">
+                    <p style="margin: 10px 0;"><strong style="color: #00b4b4;">Event:</strong> ${formValues.title}</p>
+                    <p style="margin: 10px 0;"><strong style="color: #00b4b4;">Date:</strong> ${new Date(formValues.date).toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    })}</p>
+                </div>
+            `,
+                    confirmButtonColor: '#00b4b4',
+                    confirmButtonText: 'Got it!',
+                    customClass: {
+                        confirmButton: 'swal-custom-confirm'
+                    }
+                });
+
+                return formValues;
+            }
+
+            return null;
         }
     }
 }
 </script>
 
 <style scoped>
-
 /* Main Content */
 .container {
     max-width: 1400px;

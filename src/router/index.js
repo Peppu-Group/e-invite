@@ -8,7 +8,8 @@ import HomeView from '../views/HomeView.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Event from '../views/Event.vue'
 import GuestList from '../views/GuestList.vue'
-
+import AboutView from '../views/AboutView.vue'
+import PricingView from '../views/PricingView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,6 +53,16 @@ const router = createRouter({
       path: '/guest-manager',
       name: 'guest',
       component: GuestList
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: AboutView
+    },
+    {
+      path: '/pricing',
+      name: 'pricing',
+      component: PricingView
     }
   ]
 })

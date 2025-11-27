@@ -3,8 +3,10 @@
         <!-- Navbar -->
         <nav class="navbar">
             <div class="navbar-brand">
-                <div class="brand-icon">✓</div>
-                <span>rsvpify</span>
+                <div class="brand-icon">
+                    <img class="img-fluid" src="../assets/logo.png"/>
+                </div>
+                <span>Peppu e-Invite </span>
             </div>
 
             <div class="navbar-menu">

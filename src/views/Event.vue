@@ -9,8 +9,10 @@
         <!-- Sidebar -->
         <aside class="sidebar" :class="{ 'mobile-visible': mobileMenuOpen }">
             <div class="logo">
-                <div class="logo-icon">✓</div>
-                <span>rsvpify</span>
+                <div class="logo-icon">
+                    <img class="img-fluid" src="../assets/logo.png"/>
+                </div>
+                <span>Peppu e-Invite</span>
             </div>
 
             <div class="nav-section">
@@ -251,12 +253,6 @@ export default {
     box-sizing: border-box;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: #f5f7fa;
-    color: #2d3748;
-}
-
 #app {
     display: flex;
     min-height: 100vh;
@@ -265,7 +261,7 @@ body {
 /* Sidebar */
 .sidebar {
     width: 240px;
-    background: #1a202c;
+    background: var(--deep-gold);
     color: white;
     padding: 20px 0;
     position: fixed;
@@ -290,7 +286,6 @@ body {
 .logo-icon {
     width: 40px;
     height: 40px;
-    background: #6b46c1;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -306,7 +301,7 @@ body {
 .nav-section-title {
     font-size: 11px;
     text-transform: uppercase;
-    color: #718096;
+    color: white;
     padding: 0 20px 10px;
     letter-spacing: 1px;
 }
@@ -315,7 +310,7 @@ body {
     display: flex;
     align-items: center;
     padding: 12px 20px;
-    color: #a0aec0;
+    color: white;
     cursor: pointer;
     transition: all 0.2s;
     text-decoration: none;
@@ -323,12 +318,12 @@ body {
 }
 
 .nav-item:hover {
-    background: #2d3748;
+    background: linear-gradient(135deg, var(--primary-gold) 0%, var(--deep-gold) 100%);
     color: white;
 }
 
 .nav-item.active {
-    background: #2d3748;
+    background: linear-gradient(135deg, var(--primary-gold) 0%, var(--deep-gold) 100%);
     color: white;
 }
 
@@ -339,7 +334,7 @@ body {
 }
 
 .badge {
-    background: #6b46c1;
+    background: #0891b2;
     color: white;
     border-radius: 50%;
     width: 20px;
